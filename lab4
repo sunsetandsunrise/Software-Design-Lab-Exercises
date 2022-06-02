@@ -1,0 +1,85 @@
+#answers_to_questions
+#R4.1
+def maxRec(lst):
+    if(len(lst) == 1):
+        return lst[0]
+    else:
+        maxVal = maxRec(lst[1:])
+        if(maxVal < lst[0]):
+            maxVal = lst[0]
+        return maxVal
+
+lst = [4,6,1,10,7]
+maxVal = maxRec(lst)
+print(maxVal)
+
+#inlab_a
+def f(l):
+    if len(l)==1 : return [l[0],l[0]]
+    return [max(l[0],f(l[1:])[0]),min(l[0],f(l[1:])[1])]
+
+l=[55,25,-100,-34,-67,48,300]
+print(f(l))
+
+#inlab_b
+def prod(m, n):
+    if n == 0:
+        return 0
+    else:
+        return m+prod(m, n-1)
+print(prod(5,12))
+
+#inlab_c
+def rec_reverse_string(s):
+    def helper(s, left, right):
+        if left < right:
+            s[left], s[right] = s[right], s[left]
+            return helper(s, left + 1, right - 1)
+        else:
+            return s
+
+    s_list = [char for char in s]
+    result = helper(s_list, 0, len(s_list) - 1)
+    return ''.join(result)
+
+print(rec_reverse_string('pots&pans'))
+
+#postlab
+#4.23
+from os import listdir
+from os.path import isfile, join
+
+
+def find(path, filename):
+    for f in listdir(path):
+        if isfile(join(path, f)):
+            if filename in f:
+                print(f)
+        else:
+            find(join(path, f), filename)
+            
+#4.26
+def hanoi_puzzle(peg_a):
+    temp = []
+    peg_b = []
+
+    def helper2():
+        if len(temp) == 0:
+            return peg_b
+        else:
+            peg_b.append(temp.pop())
+            return helper2()
+
+    def helper():
+        if len(peg_a) == 0:
+            return temp
+        else:
+            temp.append(peg_a.pop())
+            return helper()
+
+    temp = helper()
+    peg_b = helper2()
+    return peg_b
+    print(helper(pyramid,0))
+
+print(hanoi_puzzle(['bottom', 'middle', 'top']))
