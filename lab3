@@ -1,0 +1,615 @@
+#answers_to_questions
+#R7.1
+# Creating Node
+class Node:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+# Fucntion to insert new node at front
+def push(head, n_val):
+    t = Node(n_val)
+    t.next = head
+    head = t
+    return head
+
+# Creating LL
+head = None
+head = push(head, 1)
+head = push(head, 2)
+head = push(head, 3)
+head = push(head, 4)
+head = push(head, 5)
+
+# 5 -> 4 -> 3 -> 2 -> 1 -> None
+
+# Algorithm
+temp = head
+# check if list is empty
+if (temp == None or temp.next == None):
+     print("List empty")
+
+while (temp != None):
+     if (temp.next.next == None):
+          print(temp.val)
+          break
+     temp = temp.next
+     
+ #R7.2
+ class Node:
+
+    def _init_(self, data, next=None):
+        self.data = data
+        self.next = next
+
+class SLL:
+
+    def _init_(self):
+        self.head = None
+
+    def add(self, data):
+        if self.head is not None:
+            temp = self.head
+            while temp.next is not None:
+                temp = temp.next
+                temp.next = Node()
+            else:
+                self.head = Node()
+
+    def printList(self):
+        global temp
+        if self.head is not None:
+            temp = self.head
+        while temp is not None:
+            print(temp.data, end=" ")
+            temp = temp.next
+        else:
+            print("List is empty")
+
+    def concatLL(firstLinkedList, secondLinkedList):
+        newList = SLL()
+        temp = firstLinkedList.head
+        while temp is not None:
+                newList.add(temp.data)
+                temp = temp.next
+                temp = secondLinkedList.head
+        while temp is not None:
+            newList.add(temp.data)
+            temp = temp.next
+        return newList
+       
+        print("\nFirst list is -", end=" ")
+        firstLinkedList = SLL()
+        firstLinkedList.add(5)
+        firstLinkedList.add(6)
+        firstLinkedList.add(7)
+        firstLinkedList.printList()
+
+        print("\nSecond list is -", end=" ")
+        
+        secondLinkedList = SLL()
+        secondLinkedList.add(1)
+        secondLinkedList.add(2)
+        secondLinkedList.add(3)
+        secondLinkedList.printList()
+
+        print("\nConcatenated list is -", end=" ")
+        concatenatedList = concatLL(firstLinkedList, secondLinkedList)
+        concatenatedList.printList()
+
+#R7.3
+
+class Node:
+    def __init__(self, data):
+        self.data = data # Assign data
+        self.next = None # Initialize next as null
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def push(self, new_data):
+        new_node = Node(new_data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def getCountRec(self, node):
+        if (not node):
+            return 0
+        else:
+            return 1 + self.getCountRec(node.next)
+
+    def getCount(self):
+        return self.getCountRec(self.head)
+
+if __name__=='__main__':
+    llist = LinkedList()
+    llist.push(1)
+    llist.push(3)
+    llist.push(1)
+    llist.push(2)
+    llist.push(1)
+
+#Inlab
+#code1
+
+class Node():
+    def __init__(self, data, Next = None):
+        self.data = data
+        self.next = Next
+
+    def getData(self):
+        return self.data
+
+    def setData(self, data):
+        self.data = data
+
+    def getNext(self):
+        return self.next
+
+    def setNext(self, newNext):
+        self.next = newNext
+
+class Singlylinkedlist():
+    def __init__(self):
+        self.head = None
+
+    def isEmpty(self):
+        return self.head == None
+
+    def add(self, element):
+        temp = Node(element)
+        temp.setNext(self.head)
+        self.head = temp
+
+    def size(self):
+        curr = self.head
+        count = 0
+        while curr != None:
+            count = count + 1
+            curr = curr.getNext()
+        return count
+
+    def search(self,item):
+        curr = self.head
+        found = False
+        while curr != None and not found:
+            if curr.getData() == item:
+                found = True
+            else:
+                curr = curr.getNext()
+
+        return found
+
+    def remove(self,item):
+        curr = self.head
+        prev = None
+        found = False
+        while not found:
+            if curr.getData() == item:
+                found = True
+            else:
+                prev = curr
+                curr = curr.getNext()
+
+        if prev == None:
+            self.head = curr.getNext()
+        else:
+            prev.setNext(curr.getNext())
+
+    def getAllData(self):
+        curr = self.head
+        elements = []
+        while curr:
+            elements.append(curr.getData())
+            curr = curr.getNext()
+
+        return elements
+
+if __name__ == '__main__':
+    SLL = Singlylinkedlist()
+
+    print(SLL.head)
+
+    SLL.add(5)
+    SLL.add(3)
+    SLL.add(17)
+    SLL.add(25)
+    SLL.add(50)
+    SLL.add(23)
+
+    print(SLL.size())
+
+    print(SLL.search(40))
+    print(SLL.search(5))
+    print(SLL.getAllData())
+    SLL.remove(5)
+    print(SLL.getAllData())
+
+#code2
+class Node:
+    def __init__(self, data):
+        self.item = data
+        self.next = None
+        self.prev = None
+
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.start_node = None
+
+    def InsertToEmptyList(self, data):
+        if self.start_node is None:
+            new_node = Node(data)
+            self.start_node = new_node
+        else:
+            print("The list is empty")
+
+    def InsertToEnd(self, data):
+
+        if self.start_node is None:
+            new_node = Node(data)
+            self.start_node = new_node
+            return
+        n = self.start_node
+
+        while n.next is not None:
+            n = n.next
+        new_node = Node(data)
+        n.next = new_node
+        new_node.prev = n
+
+    def DeleteAtStart(self):
+        if self.start_node is None:
+            print("The Linked list is empty, no element to delete")
+            return
+        if self.start_node.next is None:
+            self.start_node = None
+            return
+        self.start_node = self.start_node.next
+        self.start_prev = None;
+
+    def delete_at_end(self):
+
+        if self.start_node is None:
+            print("The Linked list is empty, no element to delete")
+            return
+        if self.start_node.next is None:
+            self.start_node = None
+            return
+        n = self.start_node
+        while n.next is not None:
+            n = n.next
+        n.prev.next = None
+
+    def Display(self):
+        if self.start_node is None:
+            print("The list is empty")
+            return
+        else:
+            n = self.start_node
+            while n is not None:
+                print("Element is: ", n.item)
+                n = n.next
+        print("\n")
+
+
+NewDLL = DoublyLinkedList()
+
+NewDLL.InsertToEmptyList(4)
+
+NewDLL.InsertToEnd(8)
+NewDLL.InsertToEnd(12)
+NewDLL.InsertToEnd(16)
+NewDLL.InsertToEnd(20)
+NewDLL.InsertToEnd(24)
+
+NewDLL.Display()
+
+NewDLL.DeleteAtStart()
+
+NewDLL.DeleteAtStart()
+
+NewDLL.Display()
+
+#code3
+class Node:
+    def __init__(self, data):
+        self.data = data;
+        self.next = None;
+
+
+class Circularlinkedlist:
+    def __init__(self):
+        self.head = Node(None);
+        self.tail = Node(None);
+        self.head.next = self.tail;
+        self.tail.next = self.head;
+
+    def add(self, data):
+        newNode = Node(data);
+
+        if self.head.data is None:
+
+            self.head = newNode;
+            self.tail = newNode;
+            newNode.next = self.head;
+        else:
+
+            self.tail.next = newNode;
+
+            self.tail = newNode;
+
+            self.tail.next = self.head;
+
+    def display(self):
+        curr = self.head;
+        if self.head is None:
+            print("The List is Empty");
+            return;
+        else:
+            print("Nodes of the CLL ");
+
+            print(curr.data),
+            while (curr.next != self.head):
+                curr = curr.next;
+                print(curr.data),
+
+
+class Circularlinkedlist:
+    CLL = Circularlinkedlist();
+
+    CLL.add(5);
+    CLL.add(10);
+    CLL.add(15);
+    CLL.add(20);
+    CLL.display();    
+
+#code4
+close_symbols = ["]", "}", ")"]
+
+
+def check(pairs):
+    stack = []
+
+    for i in pairs:
+        if i in open_symbols:
+            stack.append(i)
+        elif i in close_symbols:
+            pos = close_symbols.index(i)
+            if ((len(stack) > 0) and
+                    (open_symbols[pos] == stack[len(stack) - 1])):
+                stack.pop()
+            else:
+                return "Unbalanced"
+
+    if len(stack) == 0:
+        return "Balanced"
+    else:
+        return "Unbalanced"
+
+
+string = "{{{}}}[[[]]]((()))"
+print(string, "-", check(string))
+string = "[(}{)]"
+print(string, "-", check(string))
+string = "[{}][()]"
+print(string, "-", check(string))
+string = "[({}{}{}{}{})]]"
+print(string, "-", check(string))
+
+#code5
+
+def enqueue(data):
+   queue.insert(0,data)
+
+def dequeue():
+   if len(queue)>0:
+      return queue.pop()
+   return ("Queue is Empty!")
+
+def display():
+   print("Elements on queue are:");
+   for i in range(len(queue)):
+      print(queue[i])
+
+if __name__=="__main__":
+   queue=[]
+   enqueue(10)
+   enqueue(72)
+   enqueue(10)
+   enqueue(24)
+   enqueue(67)
+   print("Popped Element is: "+str(dequeue()))
+   display()
+
+#code6
+def binary_search(arr,x):
+   l=0
+   r=len(arr)-1
+   while(l<=r):
+      mid=(l+r)//2
+      if(arr[mid]==x):
+         return mid
+      elif(x<arr[mid]):
+         r=mid-1
+      elif(x>arr[mid]):
+         l=mid+1
+   return -1
+array=[3,6,9,12,15,18,21,24,27,30]
+p=15
+print(binary_search(array,p))
+j=20
+
+#code7
+def enqueue(data):
+   queue.insert(0,data)
+
+def dequeue():
+   if len(queue)>0:
+      return queue.pop()
+   return ("Queue is Empty!")
+
+def display():
+   print("Elements on queue are:");
+   for i in range(len(queue)):
+      print(queue[i])
+
+if __name__=="__main__":
+   queue=[]
+   enqueue(10)
+   enqueue(72)
+   enqueue(10)
+   enqueue(24)
+   enqueue(67)
+   print("Popped Element is: "+str(dequeue()))
+   display()
+
+#code8
+
+def binary_search(arr,x):
+   l=0
+   r=len(arr)-1
+   while(l<=r):
+      mid=(l+r)//2
+      if(arr[mid]==x):
+         return mid
+      elif(x<arr[mid]):
+         r=mid-1
+      elif(x>arr[mid]):
+         l=mid+1
+   return -1
+array=[3,6,9,12,15,18,21,24,27,30]
+p=15
+print(binary_search(array,p))
+j=20
+print(binary_search(array,j))
+
+#code9
+class Node:
+    def __init__(self, item):
+        self.left = None
+        self.right = None
+        self.val = item
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(str(root.val) + "->", end='')
+        inorder(root.right)
+
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(str(root.val) + "->", end='')
+
+def preorder(root):
+    if root:
+        print(str(root.val) + "->", end='')
+        preorder(root.left)
+        preorder(root.right)
+
+root = Node(5)
+root.left = Node(10)
+root.right = Node(15)
+root.left.left = Node(20)
+root.left.right = Node(25)
+
+print("\nInorder traversal ")
+inorder(root)
+print("\nPreorder traversal ")
+preorder(root)
+print("\nPostorder traversal ")
+postorder(root)
+
+#code10
+
+class Node:
+    
+    def __init__(self, key):
+        self.data = key
+        self.left = None
+        self.right = None
+
+def getfullCount(root):
+    if root is None:
+        return 0
+
+    queue = []
+    queue.append(root)
+
+    count = 0  
+    while (len(queue) > 0):
+        node = queue.pop(0)
+
+        if node.left is not None and node.right is not None:
+            count = count + 1
+
+        if node.left is not None:
+            queue.append(node.left)
+
+        if node.right is not None:
+            queue.append(node.right)
+
+    return count
+
+root = Node(4)
+root.left = Node(9)
+root.right = Node(7)
+root.left.right = Node(3)
+root.left.right.left = Node(1)
+root.left.right.right = Node(14)
+root.right.right = Node(11)
+root.right.right.left = Node(6)
+
+print(getfullCount(root))
+
+#code11
+import collections
+
+def bfs(graph, root):
+
+    visited, queue = set(), collections.deque([root])
+    visited.add(root)
+
+    while queue:
+
+        vertex = queue.popleft()
+        print(str(vertex) + " ", end="")
+
+        for neighbour in graph[vertex]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+
+if __name__ == '__main__':
+    graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
+    print("Following is Breadth First Traversal: ")
+    bfs(graph, 0)
+
+#postlab
+#P7.45
+class SparseArray(object):
+
+        def __init__(self,items=0):
+            self.P = [0]*items
+
+        def __setitem__(self, m, y):
+            self.P[m] = y
+
+        def __getitem__(self, m):
+            return self.P[m]
+
+        def __str__(self):
+            return str(self.P)
+
+SA=SparseArray(5)
+
+SA[0]=(22,"some")
+SA[1]=(45,"more")
+SA[2]=(61,"values")
+SA[3]=(89,"are")
+SA[4]=(123,"here")
+
+print("Sparse Array Content: \n",SA)
